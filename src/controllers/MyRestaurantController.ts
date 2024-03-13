@@ -17,9 +17,7 @@ const createMyRestaurant = async (req: Request, res: Response) => {
     const base64Image = Buffer.from(image.buffer).toString("base64");
     const dataURI = `data:${image.mimetype};base64,${base64Image}`;
 
-    const uploadresponse = await cloudinary.v2.uploader.upload(dataURI, {
-      timeout: 600000,
-    });
+    const uploadresponse = await cloudinary.v2.uploader.upload(dataURI);
 
     const restaurant = new Restaurant(req.body);
     restaurant.imageUrl = uploadresponse.url;
